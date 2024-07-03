@@ -32,6 +32,7 @@ namespace ManageStudent
 
             app.UseAuthorization();
 
+            app.UseRouting();
 
             app.MapControllers();
 
