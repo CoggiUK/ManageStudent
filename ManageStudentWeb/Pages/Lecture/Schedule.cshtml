@@ -1,0 +1,164 @@
+﻿@page
+@using ManageStudent.DTO
+@using ManageStudent.Models
+@model ManageStuden.Pages.Lecture.ScheduleModel
+@{
+    var listGrade = ViewData["rp_grades"] as List<Grade>;
+    var listSemester = ViewData["rp_semesters"] as List<Semester>;
+    var listSchedules = ViewData["rp_Schedules"] as List<ScheduleDTO>;
+    var listSemesterById = ViewData["rp_semesters_id"] as List<Schedule>;
+}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+        font-family: 'Arial', sans-serif;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px; /* Rounded corners for the table */
+        overflow: hidden; /* Ensures rounded corners are applied */
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+    }
+
+        th.slot-column, td.slot-column {
+            width: 5%; /* Adjust this value as needed */
+            text-align: center;
+        }
+
+        th.other-columns, td.other-columns {
+            width: calc((100% - 5%) / 7); /* Divide remaining width evenly among other columns */
+            text-align: left;
+        }
+
+    th {
+        background-color: #4CAF50; /* Green background for header */
+        color: white;
+    }
+
+    td {
+        background-color: #f9f9f9; /* Light grey background for cells */
+    }
+
+    tr:nth-child(even) td {
+        background-color: #f2f2f2; /* Alternate row coloring */
+    }
+
+    .schedule-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100%; /* Ensure the div takes up the full cell height */
+    }
+
+        .schedule-details strong {
+            color: #333;
+        }
+
+    .status {
+        border-radius: 20px;
+        padding: 5px 10px;
+        color: #fff;
+        display: inline-block;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .status-delivered {
+        background-color: #28a745;
+    }
+
+    .status-shipped {
+        background-color: #17a2b8;
+    }
+
+    .status-pending {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+    .status-cancelled {
+        background-color: #dc3545;
+    }
+
+    select {
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<label for="semesterSelect">Select Semester:</label>
+<select name="selectSemester" id="semesterSelect" onchange="filterSchedules()">
+    @foreach (var sem in listSemester)
+    {
+        <option value="@sem.SemesterName">@sem.SemesterName</option>
+    }
+</select>
+
+@{
+    var daysOfWeek = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+    var slots = Enumerable.Range(1, 4);
+}
+
+<table>
+    <thead>
+        <tr>
+            <th class="slot-column">Slot</th>
+            @foreach (var dayOfWeek in daysOfWeek)
+            {
+                <th class="other-columns">@dayOfWeek</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var slot in slots)
+        {
+            <tr>
+                <td class="slot-column">@slot</td>
+                @foreach (var dayOfWeek in daysOfWeek)
+                {
+                    var schedule = listSchedules.FirstOrDefault(s => s.DayOfWeek == dayOfWeek && s.Slot == slot);
+                    <td class="other-columns">
+                        @if (schedule != null)
+                        {
+                            <div class="schedule-details" data-semester="@schedule.SemesterName">
+                                <strong>Subject:</strong> @schedule.SubjectName<br />
+                                <strong>Room:</strong> @schedule.Room<br />
+                                <span class="status status-delivered">Delivered</span> <!-- Adjust status based on your data -->
+                            </div>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function filterSchedules() {
+        var selectedSemester = document.getElementById("semesterSelect").value;
+        var scheduleDetails = document.querySelectorAll(".schedule-details");
+
+        scheduleDetails.forEach(function (detail) {
+            if (detail.getAttribute("data-semester") === selectedSemester) {
+                detail.style.display = ""; // Show the detail
+            } else {
+                detail.style.display = "none"; // Hide the detail
+            }
+        });
+    }
+
+    // Initial filter when page loads
+    window.onload = function () {
+        filterSchedules();
+    };
+</script>

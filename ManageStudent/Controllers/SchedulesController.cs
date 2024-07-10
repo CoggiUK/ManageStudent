@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ManageStudent.Models;
+using ManageStudent.DTO;
 
 namespace ManageStudent.Controllers
 {
@@ -22,13 +23,18 @@ namespace ManageStudent.Controllers
 
         // GET: api/Schedules
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Schedule>>> GetSchedules()
+        public ActionResult GetSchedules()
         {
-          if (_context.Schedules == null)
+          var schedules = _context.Schedules.Include(s => s.Semester).Include(s => s.Subject).Select(s => new ScheduleDTO
           {
-              return NotFound();
-          }
-            return await _context.Schedules.ToListAsync();
+              ScheduleId = s.ScheduleId,
+              DayOfWeek = s.DayOfWeek,
+              Room = s.Room,
+              SemesterName = s.Semester.SemesterName,
+              Slot = s.Slot,
+              SubjectName = s.Subject.SubjectName
+          }).ToList();
+            return Ok(schedules);
         }
 
         // GET: api/Schedules/5
@@ -47,6 +53,23 @@ namespace ManageStudent.Controllers
             }
 
             return schedule;
+        }
+
+        [HttpGet("FindbySemeter/{id}")]
+        public async Task<ActionResult<Schedule>> FindbySemeter(int id)
+        {
+            if (_context.Schedules == null)
+            {
+                return NotFound();
+            }
+            var schedule =  _context.Schedules.Where(s => s.SemesterId == id).ToList();
+
+            if (schedule == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(schedule);
         }
 
         // PUT: api/Schedules/5
