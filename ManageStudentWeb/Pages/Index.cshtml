@@ -1,7 +1,9 @@
 ﻿@page
+@using ManageStudentWeb.Models
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    List<Student> student = (List<Student>)ViewData["student"];
 }
 
 <div class="container">
@@ -28,8 +30,9 @@
                             </div>
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
+                                    
                                     <p class="card-category">Students</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <h4 class="card-title">@student.Count</h4>
                                 </div>
                             </div>
                         </div>
@@ -174,5 +177,36 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Gender</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="pieChart"
+                                    style="width: 50%; height: 50%"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Pie Chart</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="pieChart"
+                                    style="width: 50%; height: 50%"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<script src="js/chart-function.min.js"></script>
+<script src="js/plugin/chart.js/chart.min.js"></script>
+<script src="js/adminDashboard.js"></script>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -375,11 +375,12 @@
     <Content Remove="wwwroot\img\undraw\undraw_update_uxn2.svg" />
     <Content Remove="wwwroot\img\undraw\undraw_upgrade_06a0.svg" />
     <Content Remove="wwwroot\img\visa.svg" />
+    <Content Remove="wwwroot\js\adminDashboard.js" />
+    <Content Remove="wwwroot\js\chart-function.js" />
     <Content Remove="wwwroot\js\core\bootstrap.min.js" />
     <Content Remove="wwwroot\js\core\jquery-3.7.1.min.js" />
     <Content Remove="wwwroot\js\core\popper.min.js" />
     <Content Remove="wwwroot\js\demo.js" />
-    <Content Remove="wwwroot\js\kaiadmin.js" />
     <Content Remove="wwwroot\js\plugin\bootstrap-notify\bootstrap-notify.min.js" />
     <Content Remove="wwwroot\js\plugin\bootstrap-tagsinput\bootstrap-tagsinput.min.js" />
     <Content Remove="wwwroot\js\plugin\bootstrap-toggle\bootstrap-toggle.min.js" />
@@ -409,6 +410,10 @@
     <Content Remove="wwwroot\js\plugin\webfont\webfont.min.js" />
     <Content Remove="wwwroot\js\setting-demo.js" />
     <Content Remove="wwwroot\js\setting-demo2.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\adminDashboard.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -780,11 +785,12 @@
     <None Include="wwwroot\img\undraw\undraw_update_uxn2.svg" />
     <None Include="wwwroot\img\undraw\undraw_upgrade_06a0.svg" />
     <None Include="wwwroot\img\visa.svg" />
+    <None Include="wwwroot\js\adminDashboard.js" />
     <None Include="wwwroot\js\core\bootstrap.min.js" />
     <None Include="wwwroot\js\core\jquery-3.7.1.min.js" />
     <None Include="wwwroot\js\core\popper.min.js" />
     <None Include="wwwroot\js\demo.js" />
-    <None Include="wwwroot\js\kaiadmin.js" />
+    <None Include="wwwroot\js\chart-function.js" />
     <None Include="wwwroot\js\plugin\bootstrap-notify\bootstrap-notify.min.js" />
     <None Include="wwwroot\js\plugin\bootstrap-tagsinput\bootstrap-tagsinput.min.js" />
     <None Include="wwwroot\js\plugin\bootstrap-toggle\bootstrap-toggle.min.js" />

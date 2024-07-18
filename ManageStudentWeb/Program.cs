@@ -1,4 +1,4 @@
-namespace ManageStudentWeb
+namespace ManageStudentWebWeb
 {
     public class Program
     {
