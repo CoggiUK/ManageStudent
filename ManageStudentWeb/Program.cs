@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 namespace ManageStudentWebWeb
+=======
+namespace ManageStuden
+>>>>>>> main
 {
     public class Program
     {

@@ -4,7 +4,11 @@ using System.Security.Cryptography;
 using System.Net.Http;
 using ManageStudentWeb.Models;
 
+<<<<<<< HEAD
 namespace ManageStudentWebWeb.Pages
+=======
+namespace ManageStuden.Pages
+>>>>>>> main
 {
     public class IndexModel : PageModel
     {

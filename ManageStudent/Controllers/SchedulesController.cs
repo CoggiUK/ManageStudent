@@ -49,6 +49,23 @@ namespace ManageStudent.Controllers
             return schedule;
         }
 
+        [HttpGet("FindbySemeter/{id}")]
+        public async Task<ActionResult<Schedule>> FindbySemeter(int id)
+        {
+            if (_context.Schedules == null)
+            {
+                return NotFound();
+            }
+            var schedule =  _context.Schedules.Where(s => s.SemesterId == id).ToList();
+
+            if (schedule == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(schedule);
+        }
+
         // PUT: api/Schedules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

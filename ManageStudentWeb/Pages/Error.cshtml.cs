@@ -2,7 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 
+<<<<<<< HEAD
 namespace ManageStudentWebWeb.Pages
+=======
+namespace ManageStuden.Pages
+>>>>>>> main
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [IgnoreAntiforgeryToken]

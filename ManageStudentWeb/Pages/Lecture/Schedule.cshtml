@@ -1,0 +1,70 @@
+﻿@page
+@using ManageStudent.Models
+@model ManageStuden.Pages.Lecture.ScheduleModel
+@{
+    var listGrade = ViewData["rp_grades"] as List<Grade>;
+    var listSemester = ViewData["rp_semesters"] as List<Semester>;
+    var listSchedules = ViewData["rp_Schedules"] as List<Schedule>;
+    var listSemesterById = ViewData["rp_semesters_id"] as List<Schedule>;
+}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+<label for="semesterSelect">Select Semester:</label>
+<select name="selectSemester" id="semesterSelect" onchange="filterSchedules()">
+    @foreach (var sem in listSemester)
+    {
+        <option value="@sem.SemesterId">@sem.SemesterName</option>
+    }
+</select>
+
+@{
+    var daysOfWeek = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+    var slots = Enumerable.Range(1, 4);
+
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Slot</th> <!-- Thêm cột Slot -->
+            @foreach (var dayOfWeek in daysOfWeek)
+            {
+                <th>@dayOfWeek</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var slot in slots)
+        {
+            <tr>
+                <td>@slot</td> <!-- Hiển thị giá trị slot -->
+                @foreach (var dayOfWeek in daysOfWeek)
+                {
+                    var schedule = listSchedules.FirstOrDefault(s => s.DayOfWeek == dayOfWeek && s.Slot == slot);
+
+                    <td>
+                        @if (schedule != null)
+                        {
+                            <div>
+                                <strong>Room:</strong> @schedule.Room<br />
+                                <strong>Subject:</strong> @schedule.SubjectId<br />
+                                <strong>Semester:</strong> @schedule.SemesterId
+                                <!-- Add more details as needed -->
+                            </div>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

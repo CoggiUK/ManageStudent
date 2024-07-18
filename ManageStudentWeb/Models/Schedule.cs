@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
+<<<<<<< HEAD
 namespace ManageStudentWeb.Models
+=======
+namespace ManageStudent.Models
+>>>>>>> main
 {
     public partial class Schedule
     {
